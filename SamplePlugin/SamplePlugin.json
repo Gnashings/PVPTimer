@@ -1,8 +1,8 @@
 {
-  "Author": "your name here",
-  "Name": "Sample Plugin",
-  "Punchline": "A short one-liner that shows up in /xlplugins.",
-  "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
+  "Author": "Gnashings",
+  "Name": "PvPTimer",
+  "Punchline": "Shows current and upcoming PvP map rotations.",
+  "Description": "Displays Frontline and Crystalline Conflict map rotations with countdown timers.",
   "ApplicableVersion": "any",
   "Tags": [
     "sample",
