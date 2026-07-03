@@ -1,5 +1,7 @@
 # PvPTimer
 
-A small plugin that shows when the PvP maps will update
+Displays Frontline and Crystalline Conflict map rotations with countdown timers.
 
-Use /pvptimer to open.
+https://raw.githubusercontent.com/Gnashings/PvPTimer/main/repo.json
+
+/pvptimer
