@@ -1,24 +1,25 @@
-using System;
+using System; 
 namespace PvPTimer;
 
 /// <summary>
 /// Provides map rotation calculations for FFXIV PvP modes.
-/// Reference dates and intervals sourced from community research.
+/// Reference dates and intervals sourced from community research. (Thank you pvpc)
 /// </summary>
 public static class RotationCalculator
 {
     private const double FrontlineIntervalMinutes = 1440; // 24 hours
-    private const double CrystallineConflictIntervalMinutes = 90;
+    private const double CrystallineConflictIntervalMinutes = 60;
 
     // The date/time at which each map cycle is known to begin
-    private static readonly DateTime FrontlineReferenceDate = new(2025, 7, 16, 15, 0, 0, DateTimeKind.Utc);
-    private static readonly DateTime CrystallineConflictReferenceDate = new(2026, 1, 9, 15, 0, 0, DateTimeKind.Utc);
+    private static readonly DateTime FrontlineReferenceDate = new(2026, 7, 3, 15, 0, 0, DateTimeKind.Utc);
+    private static readonly DateTime CrystallineConflictReferenceDate = new(2026, 7, 3, 18, 0, 0, DateTimeKind.Utc);
 
     private static readonly string[] FrontlineMaps =
-        { "Secure", "Seize", "Shatter", "Naadam", "Worqor Chirteh" };
+        { "Triumph", "Seize", "Secure", "Naadam", "Triumphs", "Seize", "Shatter", "Naadam" };
 
     private static readonly string[] CrystallineConflictMaps =
-        { "Palaistra", "Volcanic Heart", "Cloud Nine", "Castletown", "Bayside Grappling", "Red Sands" };
+        { "Palaistra", "Volcanic Heart", "Bayside Battleground", "Cloud Nine",
+      "Clockwork Castletown", "Archeia Harmonias", "Red Sands" };
 
     // returns the currently active Frontline map.
     public static string GetCurrentFrontlineMap() =>

@@ -1,0 +1,23 @@
+{
+  "Author": "Gnashings",
+  "Name": "PvPTimer",
+  "InternalName": "PvPTimer",
+  "AssemblyVersion": "0.0.0.1",
+  "Description": "Displays Frontline and Crystalline Conflict map rotations with countdown timers.",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "pvp",
+    "timer",
+    "frontline",
+    "frontlines",
+    "CC",
+    "Crystalline Conflict"
+  ],
+  "DalamudApiLevel": 15,
+  "LoadRequiredState": 0,
+  "LoadSync": false,
+  "CanUnloadAsync": false,
+  "LoadPriority": 0,
+  "Punchline": "Shows current and upcoming PvP map rotations.",
+  "AcceptsFeedback": true
+}
