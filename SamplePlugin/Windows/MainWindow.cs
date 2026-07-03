@@ -22,11 +22,13 @@ public class MainWindow : Window, IDisposable
 
     public override void Draw()
     {
-        ImGui.SeparatorText("Crystalline Conflict");
+        ImGui.Separator();
+        ImGui.Text("Crystalline Conflict");
         ImGui.Text(RotationCalculator.GetCrystallineConflictTimeUntilNext().ToString(@"hh\:mm\:ss"));
         ImGui.Text(RotationCalculator.GetCurrentCrystallineConflictMap() + " → " + RotationCalculator.GetNextCrystallineConflictMap());
 
-        ImGui.SeparatorText("Frontline");
+        ImGui.Separator();
+        ImGui.Text("Frontline");
         ImGui.Text(RotationCalculator.GetFrontlineTimeUntilNext().ToString(@"hh\:mm\:ss"));
         ImGui.Text(RotationCalculator.GetCurrentFrontlineMap() + " → " + RotationCalculator.GetNextFrontlineMap());
 
