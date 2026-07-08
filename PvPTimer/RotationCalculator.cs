@@ -1,4 +1,4 @@
-using System; 
+using System;
 namespace PvPTimer;
 
 /// <summary>
@@ -21,44 +21,36 @@ public static class RotationCalculator
         { "Palaistra", "Volcanic Heart", "Bayside Battleground", "Cloud Nine",
       "Clockwork Castletown", "Archeia Harmonias", "Red Sands" };
 
-    // returns the currently active Frontline map.
-    public static string GetCurrentFrontlineMap() =>
-        GetMapAtOffset(FrontlineReferenceDate, FrontlineMaps, FrontlineIntervalMinutes, 0);
+    public static string GetCurrentFrontlineMap(DateTime? now = null) =>
+        GetMapAtOffset(FrontlineReferenceDate, FrontlineMaps, FrontlineIntervalMinutes, 0, now ?? DateTime.UtcNow);
 
-    // returns the currently active Crystalline Conflict map.
-    public static string GetCurrentCrystallineConflictMap() =>
-        GetMapAtOffset(CrystallineConflictReferenceDate, CrystallineConflictMaps, CrystallineConflictIntervalMinutes, 0);
+    public static string GetCurrentCrystallineConflictMap(DateTime? now = null) =>
+        GetMapAtOffset(CrystallineConflictReferenceDate, CrystallineConflictMaps, CrystallineConflictIntervalMinutes, 0, now ?? DateTime.UtcNow);
 
-    // returns the next Crystalline Conflict map after the current one.
-    public static string GetNextCrystallineConflictMap() =>
-        GetMapAtOffset(CrystallineConflictReferenceDate, CrystallineConflictMaps, CrystallineConflictIntervalMinutes, 1);
+    public static string GetNextCrystallineConflictMap(DateTime? now = null) =>
+        GetMapAtOffset(CrystallineConflictReferenceDate, CrystallineConflictMaps, CrystallineConflictIntervalMinutes, 1, now ?? DateTime.UtcNow);
 
-    // returns the next Frontline map after the current one.
-    public static string GetNextFrontlineMap() =>
-        GetMapAtOffset(FrontlineReferenceDate, FrontlineMaps, FrontlineIntervalMinutes, 1);
+    public static string GetNextFrontlineMap(DateTime? now = null) =>
+        GetMapAtOffset(FrontlineReferenceDate, FrontlineMaps, FrontlineIntervalMinutes, 1, now ?? DateTime.UtcNow);
 
-    // returns how long until the Frontline map rotates.
-    public static TimeSpan GetFrontlineTimeUntilNext() =>
-        GetTimeUntilNext(FrontlineReferenceDate, FrontlineIntervalMinutes);
+    public static TimeSpan GetFrontlineTimeUntilNext(DateTime? now = null) =>
+        GetTimeUntilNext(FrontlineReferenceDate, FrontlineIntervalMinutes, now ?? DateTime.UtcNow);
 
-    // returns how long until the Crystalline Conflict map rotates.
-    public static TimeSpan GetCrystallineConflictTimeUntilNext() =>
-        GetTimeUntilNext(CrystallineConflictReferenceDate, CrystallineConflictIntervalMinutes);
+    public static TimeSpan GetCrystallineConflictTimeUntilNext(DateTime? now = null) =>
+        GetTimeUntilNext(CrystallineConflictReferenceDate, CrystallineConflictIntervalMinutes, now ?? DateTime.UtcNow);
 
-    // returns the map that will be active at a given rotation offset from the current one.
-    // an offset of 0 returns the current map, 1 returns the next, and so on.
-    private static string GetMapAtOffset(DateTime referenceDate, string[] maps, double intervalMinutes, int offset)
+    private static string GetMapAtOffset(DateTime referenceDate, string[] maps, double intervalMinutes, int offset, DateTime now)
     {
-        var elapsed = (DateTime.UtcNow - referenceDate).TotalMinutes;
+        var elapsed = (now - referenceDate).TotalMinutes;
         var index = ((int)(elapsed / intervalMinutes) + offset) % maps.Length;
         if (index < 0) index += maps.Length;
         return maps[index];
     }
 
-    private static TimeSpan GetTimeUntilNext(DateTime referenceDate, double intervalMinutes)
+    private static TimeSpan GetTimeUntilNext(DateTime referenceDate, double intervalMinutes, DateTime now)
     {
-        var elapsed = (DateTime.UtcNow - referenceDate).TotalMinutes;
-        var minutesSinceLast = elapsed % intervalMinutes;
-        return TimeSpan.FromMinutes(intervalMinutes - minutesSinceLast);
+        var elapsed = (now - referenceDate).TotalMinutes;
+        var remaining = intervalMinutes - (elapsed % intervalMinutes);
+        return TimeSpan.FromMinutes(remaining % intervalMinutes == 0 ? intervalMinutes : remaining);
     }
 }
